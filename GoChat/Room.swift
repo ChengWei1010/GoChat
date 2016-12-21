@@ -31,12 +31,12 @@ import Foundation
 
 internal class Room {
     internal let id: String
-    //internal let roomName: String
+    internal let roomName: String
     internal let roomNum: String
     
-    init(id: String, roomNum: String) {
+    init(id: String, roomName:String, roomNum: String) {
         self.id = id
-        //self.roomName = roomName
+        self.roomName = roomName
         self.roomNum = roomNum
     }
 }

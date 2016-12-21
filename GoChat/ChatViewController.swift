@@ -17,11 +17,12 @@ import FirebaseAuth
 class ChatViewController: JSQMessagesViewController {
     var messages = [JSQMessage]()
     var roomRef: FIRDatabaseReference?
+    
     private lazy var messageRef: FIRDatabaseReference = self.roomRef!.child("薇的訊息")
     
     var room: Room? {
         didSet {
-            title = room?.roomNum
+            title = room?.roomName
         }
     }
     

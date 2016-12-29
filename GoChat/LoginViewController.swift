@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseDatabase
 
 class LoginViewController: UIViewController {
     
@@ -55,7 +56,17 @@ class LoginViewController: UIViewController {
                     return
                 }
                 print("Your NickName is " + self.Name.text!)
-                print(FIRAuth.auth()?.currentUser?.uid)
+                print((FIRAuth.auth()?.currentUser?.uid)!)
+                let userName = self.Name.text
+                let userId = FIRAuth.auth()?.currentUser?.uid
+                
+                let userRef = FIRDatabase.database().reference().child("users")
+                
+                //新增User到資料庫
+                let newUser = userRef.childByAutoId()
+                let newUserData = ["NickName":userName, "id":userId]
+                newUser.setValue(newUserData)
+                
                 self.performSegue(withIdentifier: "LoginToApp", sender: nil)
             })
         }

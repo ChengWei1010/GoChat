@@ -11,7 +11,6 @@
 		79235BE91E08026500629D70 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79235BE81E08026400629D70 /* Room.swift */; };
 		79A9400C1DF40B5100BA0EDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9400B1DF40B5100BA0EDB /* AppDelegate.swift */; };
 		79A940161DF40B5100BA0EDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79A940141DF40B5100BA0EDB /* LaunchScreen.storyboard */; };
-		79A940211DF40B5100BA0EDB /* GoChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A940201DF40B5100BA0EDB /* GoChatTests.swift */; };
 		79A9402C1DF40B5100BA0EDB /* GoChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9402B1DF40B5100BA0EDB /* GoChatUITests.swift */; };
 		79A9403A1DF40B7900BA0EDB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A940391DF40B7900BA0EDB /* LoginViewController.swift */; };
 		79A9403C1DF40B8400BA0EDB /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A9403B1DF40B8400BA0EDB /* ChatViewController.swift */; };
@@ -50,8 +49,6 @@
 		79A940151DF40B5100BA0EDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79A940171DF40B5100BA0EDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79A9401C1DF40B5100BA0EDB /* GoChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		79A940201DF40B5100BA0EDB /* GoChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoChatTests.swift; sourceTree = "<group>"; };
-		79A940221DF40B5100BA0EDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79A940271DF40B5100BA0EDB /* GoChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79A9402B1DF40B5100BA0EDB /* GoChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoChatUITests.swift; sourceTree = "<group>"; };
 		79A9402D1DF40B5100BA0EDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,7 +143,6 @@
 				79235BED1E08054D00629D70 /* Model */,
 				79235BE71E08021300629D70 /* Controller */,
 				79235BEA1E0804C800629D70 /* Layout */,
-				79A9401F1DF40B5100BA0EDB /* GoChatTests */,
 				79A9402A1DF40B5100BA0EDB /* GoChatUITests */,
 				79A940091DF40B5100BA0EDB /* Products */,
 				1CE8B36D8B2237EDF2133605 /* Pods */,
@@ -175,15 +171,6 @@
 				79A940431DF423F600BA0EDB /* GoogleService-Info.plist */,
 			);
 			path = GoChat;
-			sourceTree = "<group>";
-		};
-		79A9401F1DF40B5100BA0EDB /* GoChatTests */ = {
-			isa = PBXGroup;
-			children = (
-				79A940201DF40B5100BA0EDB /* GoChatTests.swift */,
-				79A940221DF40B5100BA0EDB /* Info.plist */,
-			);
-			path = GoChatTests;
 			sourceTree = "<group>";
 		};
 		79A9402A1DF40B5100BA0EDB /* GoChatUITests */ = {
@@ -400,7 +387,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79A940211DF40B5100BA0EDB /* GoChatTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

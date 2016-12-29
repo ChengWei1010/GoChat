@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 enum Section: Int {
     case createNewChannelSection = 0
@@ -67,7 +68,7 @@ class RoomsViewController: UIViewController {
         let newRoomRef = roomRef.child(String(randomRoomNum))       //定義firebase裡的reference
         //原：let newChannelRef = channelRef.childByAutoId()
         let roomName = self.InputRoomName.text
-        let roomItem = ["RoomName":roomName!, "RoomNum": randomRoomNum, "Members":senderDisplayName!] as [String : Any]
+        let roomItem = ["RoomName":roomName!, "RoomNum": randomRoomNum] as [String : Any]
         newRoomRef.setValue(roomItem)
         
         print("room ref is: " + String(describing: newRoomRef))
@@ -76,19 +77,17 @@ class RoomsViewController: UIViewController {
     }
 
     @IBAction func EnterRoom(_ sender: Any) {
-        let inputRoomNum = self.InputRoomNum.text
-        
         roomRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.value is NSNull{
-                print("this room doesn't exist")
+                print("這是不存在的房間")
             }else{
                 for child in snapshot.children{
-                    //let targetRoomRef = self.roomRef.child(inputRoomNum!)
                     let existRoom = (child as AnyObject).key as String
-                    print(existRoom)
-                    print("enter Room " + inputRoomNum!)
-                    self.performSegue(withIdentifier: "ShowRoom", sender: existRoom)
+                    print("現有房間 " + existRoom)
                 }
+                //let wantedRoomSender = self.rooms 我把sender弄成self就可以了，原本是 wantedRoomSender               
+                self.performSegue(withIdentifier: "ShowRoom", sender: self)
+                print("輸入了想進的房號是 " + self.InputRoomNum.text!)
             }
         })
     }
@@ -111,21 +110,18 @@ class RoomsViewController: UIViewController {
 //            }
 //        })
     }
-    private func findMyRoomRef(InputRoomNum:String){
         
-    }
-
-    
     // MARK: Navigation
     override func prepare(for segue:UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        if let room = sender as? Room {
+        //super.prepare(for: segue, sender: sender)
+        //if let wantedRoomSender = sender as? Room{
             let chatVc = segue.destination as! ChatViewController
+            let targetNum = self.InputRoomNum.text! as String
             chatVc.senderDisplayName = senderDisplayName
-            chatVc.room = room
-            chatVc.roomRef = roomRef.child(room.roomNum)
-            print(chatVc.roomRef!)
-        }
-    }
-    
+            //chatVc.targetRoomRef = roomRef.child(self.InputRoomNum.text!)
+            //chatVc.room = wantedRoomSender
+            chatVc.targetRoomNum = targetNum
+        //}
+        //else{print("error!!!!!!!!!!!")}
+    }    
 }

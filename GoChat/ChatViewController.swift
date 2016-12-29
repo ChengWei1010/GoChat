@@ -10,15 +10,26 @@ import UIKit
 import JSQMessagesViewController
 import MobileCoreServices
 import AVKit
+import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 import FirebaseAuth
 
 class ChatViewController: JSQMessagesViewController {
     var messages = [JSQMessage]()
-    var roomRef: FIRDatabaseReference?
     
-    private lazy var messageRef: FIRDatabaseReference = self.roomRef!.child("薇的訊息")
+    //********選擇房間參考位址及房號
+    //var targetRoomRef: FIRDatabaseReference?
+    var targetRoomNum = String()
+    
+    //位址寫死，進到2244
+    //let targetRoomRef = FIRDatabase.database().reference().child("rooms").child("\(InputRoomNum.text)")
+    //var targetRoomRef: FIRDatabaseReference = FIRDatabase.database().reference().child("rooms").child(self.targetRoomNum)
+    fileprivate lazy var storageRef: FIRStorageReference = FIRStorage.storage().reference(forURL: "gs://tripgif-b205b.appspot.com")
+    
+    //********抓出訊息的根參考位址
+    //private lazy var messageRef: FIRDatabaseReference = self.targetRoomRef!.child("messages")
+    private lazy var messageRef: FIRDatabaseReference = FIRDatabase.database().reference().child("rooms").child("\(self.targetRoomNum)").child("messages")
     
     var room: Room? {
         didSet {
@@ -28,6 +39,9 @@ class ChatViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("我想要的房號是" + self.targetRoomNum)
+        print(messageRef)
+        //print("我想要的房間位址是" + "\(self.targetRoomRef)")
         // No avatars
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
@@ -45,20 +59,19 @@ class ChatViewController: JSQMessagesViewController {
         observeMessages()
     }
     func observeUsers(id: String){
-        FIRDatabase.database().reference().child("users").child(id).observe(.value, with:{
+        var senderDisplayName = self.senderDisplayName
+        FIRDatabase.database().reference().child("Users").child(id).observe(.value, with:{
             snapshot in
             if let dict = snapshot.value as? [String:AnyObject]
             {
                 print(dict)
-                //let NickName = dict["NickName"]as! String
-                self.setUpNickName()
+                print(senderDisplayName!)
+                senderDisplayName = (dict["Users"]as! String)
+                //self.setUpNickName()
             }
-        }
-        )
+        })
     }
-    func setUpNickName(){
-        
-    }
+    
     func observeMessages() {
         messageRef.observe(FIRDataEventType.childAdded){(snapshot: FIRDataSnapshot) in
             if let dict = snapshot.value as?[String: AnyObject]{
@@ -105,13 +118,6 @@ class ChatViewController: JSQMessagesViewController {
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         print("已點傳送按鈕")
-        //print("\(text)")
-        //print(senderId)
-        //print(senderDisplayName)
-        
-        //messages.append(JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text))
-        //collectionView.reloadData()
-        //print(messages)
         
         let newMessage = messageRef.childByAutoId()
         let messageData = ["text":text, "senderId":senderId, "senderName":senderDisplayName, "MediaType":"TEXT"]
@@ -281,49 +287,7 @@ class ChatViewController: JSQMessagesViewController {
                 newMessage.setValue(messageData)
             }
         }
-        
     }
-    //indicate an user is typing
-//    override func textViewDidChange(_ textView: UITextView) {
-//        super.textViewDidChange(textView)
-//        // If the text is not empty, the user is typing
-//        isTyping = textView.text != ""
-//    }
-//    private lazy var userIsTypingRef: FIRDatabaseReference =
-//        self.channelRef!.child("typingIndicator").child(self.senderId) // 1
-//    private var localTyping = false // 2
-//    var isTyping: Bool {
-//        get {
-//            return localTyping
-//        }
-//        set {
-//            // 3
-//            localTyping = newValue
-//            userIsTypingRef.setValue(newValue)
-//        }
-//    }
-//    private func observeTyping() {
-//        let typingIndicatorRef = channelRef!.child("typingIndicator")
-//        userIsTypingRef = typingIndicatorRef.child(senderId)
-//        userIsTypingRef.onDisconnectRemoveValue()
-//        // 1
-//        usersTypingQuery.observe(.value) { (data: FIRDataSnapshot) in
-//            // 2 You're the only one typing, don't show the indicator
-//            if data.childrenCount == 1 && self.isTyping {
-//                return
-//            }
-//            
-//            // 3 Are there others typing?
-//            self.showTypingIndicator = data.childrenCount > 0
-//            self.scrollToBottom(animated: true)
-//        }
-//    }
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        observeTyping()
-//    }
-//    private lazy var usersTypingQuery: FIRDatabaseQuery =
-//        self.channelRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
 }
 
 

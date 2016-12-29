@@ -1,5 +1,5 @@
 //
-//  Channel.swift
+//  Room.swift
 //  GoChat
 //
 //  Created by 鄭薇 on 2016/12/19.

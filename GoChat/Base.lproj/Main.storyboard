@@ -56,17 +56,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CW4-ES-o4h">
-                                <rect key="frame" x="120" y="500" width="134" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login By NickName">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="NickNameButton:" destination="j2d-G6-POv" eventType="touchUpInside" id="YIu-20-8pM"/>
-                                    <segue destination="g23-Pf-vCe" kind="presentation" identifier="LoginToApp" id="QEs-mj-CXg"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCp-WK-VWT">
                                 <rect key="frame" x="94" y="384" width="187" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -75,6 +64,17 @@
                                 </state>
                                 <connections>
                                     <action selector="CreateAccount:" destination="j2d-G6-POv" eventType="touchUpInside" id="ttL-hZ-kzo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CW4-ES-o4h">
+                                <rect key="frame" x="99" y="500" width="177" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Login By NickName"/>
+                                <connections>
+                                    <action selector="NickNameButton:" destination="j2d-G6-POv" eventType="touchUpInside" id="YIu-20-8pM"/>
+                                    <segue destination="g23-Pf-vCe" kind="presentation" identifier="LoginToApp" id="QEs-mj-CXg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -94,7 +94,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3yu-4d-nKH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-178" y="489"/>
+            <point key="canvasLocation" x="-178.40000000000001" y="488.90554722638683"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="iSV-AS-ZOm">

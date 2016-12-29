@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // Set border color and width
-        Enterbutton.layer.borderColor = UIColor.gray.cgColor
+        //Enterbutton.layer.borderColor = UIColor.gray.cgColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,13 +41,7 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    @IBAction func CreateAccount(_ sender: Any) {
-        let Name = self.Name.text
-        let InputEmail = self.InputEmail.text
-        let Password = self.Password.text
-        Helper.helper.CreateAccountByEmail(NickName: Name!, Email: InputEmail!, Password: Password!)
-    }
+    
     @IBAction func NickNameButton(_ sender: Any) {
         if Name?.text != "" {
             FIRAuth.auth()?.signInAnonymously(completion: { (user, error) in
@@ -71,13 +65,6 @@ class LoginViewController: UIViewController {
             })
         }
     }
-    @IBAction func EnterChatRoom(_ sender: Any) {
-        let Name = self.Name.text
-        let InputEmail = self.InputEmail.text
-        let Password = self.Password.text
-        Helper.helper.EnterChatRoomByEmail(NickName: Name!, Email: InputEmail!, Password: Password!)
-        self.dismiss(animated: true, completion:nil)
-    }
     
     // MARK: - Navigation
 
@@ -86,7 +73,6 @@ class LoginViewController: UIViewController {
         super.prepare(for: segue, sender: sender)
         let navVc = segue.destination as! UINavigationController // 1
         let roomVc = navVc.viewControllers.first as! RoomsViewController // 2
-        
         roomVc.senderDisplayName = Name?.text // 3
     }
 }

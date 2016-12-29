@@ -23,7 +23,7 @@ class ChatViewController: JSQMessagesViewController {
     var targetRoomNum = String()
     
     //位址寫死，進到2244
-    //let targetRoomRef = FIRDatabase.database().reference().child("rooms").child("\(InputRoomNum.text)")
+    //let targetRoomRef = FIRDatabase.database().reference().child("rooms").child("2244")
     //var targetRoomRef: FIRDatabaseReference = FIRDatabase.database().reference().child("rooms").child(self.targetRoomNum)
     fileprivate lazy var storageRef: FIRStorageReference = FIRStorage.storage().reference(forURL: "gs://tripgif-b205b.appspot.com")
     
@@ -39,7 +39,7 @@ class ChatViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("我想要的房號是" + self.targetRoomNum)
+        print("進來了...我要進的房號是" + self.targetRoomNum)
         print(messageRef)
         //print("我想要的房間位址是" + "\(self.targetRoomRef)")
         // No avatars
@@ -52,8 +52,8 @@ class ChatViewController: JSQMessagesViewController {
             {
                 self.senderDisplayName = "anonymous"
             }else{
-                //self.senderId = FIRAuth.auth()?.currentUser?.uid
-                //self.senderDisplayName = currentUser.senderDiaplayName
+                self.senderId = FIRAuth.auth()?.currentUser?.uid
+                self.senderDisplayName = self.senderDisplayName
             }
         }
         observeMessages()
@@ -243,7 +243,6 @@ class ChatViewController: JSQMessagesViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
     func sendMedia(picture:UIImage?, video:NSURL?){
         print (picture!)
         print(FIRStorage.storage().reference())

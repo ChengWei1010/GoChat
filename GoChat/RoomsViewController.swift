@@ -79,14 +79,13 @@ class RoomsViewController: UIViewController {
     @IBAction func EnterRoom(_ sender: Any) {
         roomRef.observeSingleEvent(of: .value, with: { (snapshot) in
             if snapshot.value is NSNull{
-                print("這是不存在的房間")
+                print("不存在任何房間")
             }else{
                 for child in snapshot.children{
                     let existRoom = (child as AnyObject).key as String
                     print("現有房間 " + existRoom)
                 }
                 //let wantedRoomSender = self.rooms 我把sender弄成self就可以了，原本是 wantedRoomSender               
-                self.performSegue(withIdentifier: "ShowRoom", sender: self)
                 print("輸入了想進的房號是 " + self.InputRoomNum.text!)
             }
         })
@@ -113,15 +112,16 @@ class RoomsViewController: UIViewController {
         
     // MARK: Navigation
     override func prepare(for segue:UIStoryboardSegue, sender: Any?) {
-        //super.prepare(for: segue, sender: sender)
-        //if let wantedRoomSender = sender as? Room{
+        super.prepare(for: segue, sender: sender)
+        if segue.identifier == "ShowRoom"{
             let chatVc = segue.destination as! ChatViewController
             let targetNum = self.InputRoomNum.text! as String
             chatVc.senderDisplayName = senderDisplayName
             //chatVc.targetRoomRef = roomRef.child(self.InputRoomNum.text!)
             //chatVc.room = wantedRoomSender
             chatVc.targetRoomNum = targetNum
-        //}
-        //else{print("error!!!!!!!!!!!")}
+            print("傳segue中...")
+        }
+        else{print("傳值error!!!!!!!!!!!")}
     }    
 }
